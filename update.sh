@@ -8,7 +8,7 @@ echo "4000" > /upnp/port
 
 while :
 do
-	echo "Press [CTRL+C] to stop.."
+    echo "Press [CTRL+C] to stop.."
     PORT=$(cat /upnp/port)
     WAN_ADDR=$(dig +short txt ch whoami.cloudflare @1.0.0.1 | tr -d '"')
     LAN_ADDR=$(upnpc -l | grep "Local LAN ip address" | cut -d: -f2)
@@ -17,11 +17,11 @@ do
     do
         PORT=$(($PORT + 1))
         echo "increment port $PORT"
-        echo $PORT > /upnp/port
+        echo "$PORT" > /upnp/port
     done
 
 
     echo "[\"$WAN_ADDR:$PORT\",\"$LAN_ADDR:4000\"]" > /upnp/addresses
     
-	sleep 3600
+    sleep 3600
 done
